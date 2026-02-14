@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Robloxian Franchise Network Access Page</title>
+  <meta name="color-scheme" content="light dark" />
+
+  <style>
+    :root{
+      --bg0:#050711;
+      --bg1:#08102A;
+      --card:#0D1736CC;
+      --cardSolid:#0D1736;
+      --stroke:#24355E;
+      --stroke2:#2D4272;
+
+      --text:#EAF0FF;
+      --muted:#B8C3E6;
+      --muted2:#93A0C9;
+
+      --accent:#6EA8FF;
+      --accent2:#7CF0C5;
+
+      --shadow:0 22px 80px rgba(0,0,0,.55);
+      --radius:20px;
+    }
+
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg0:#F4F7FF;
+        --bg1:#EEF2FF;
+        --card:#FFFFFFE6;
+        --cardSolid:#FFFFFF;
+        --stroke:#D8DEEF;
+        --stroke2:#C8D0EA;
+
+        --text:#101828;
+        --muted:#344054;
+        --muted2:#475467;
+
+        --accent:#2563EB;
+        --accent2:#0EA5A4;
+
+        --shadow:0 18px 55px rgba(16,24,40,.12);
+      }
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
+      background: radial-gradient(1200px 700px at 16% 0%, var(--bg1), var(--bg0));
+      overflow-x:hidden;
+    }
+
+    /* Background accents */
+    .bg{position:fixed;inset:0;pointer-events:none;z-index:-1;}
+    .grid{
+      position:absolute;inset:-25%;
+      background:
+        linear-gradient(to right, rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size:46px 46px;
+      transform:rotate(8deg);
+      opacity:.26;
+    }
+    .glow{
+      position:absolute;width:760px;height:760px;border-radius:999px;
+      filter:blur(70px);opacity:.30;
+    }
+    .glow.a{left:-260px;top:-300px;background:radial-gradient(circle at 30% 30%, var(--accent), transparent 62%);}
+    .glow.b{right:-280px;bottom:-320px;background:radial-gradient(circle at 40% 40%, var(--accent2), transparent 62%);}
+
+    .shell{max-width:980px;margin:0 auto;padding:34px 18px 64px;}
+
+    header{
+      display:flex;justify-content:space-between;align-items:flex-start;
+      gap:16px;flex-wrap:wrap;margin-bottom:18px;
+    }
+    .brand{display:flex;align-items:center;gap:14px;}
+    .mark{
+      width:48px;height:48px;border-radius:16px;
+      background:linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow:var(--shadow);
+    }
+    .title{font-size:18px;font-weight:800;letter-spacing:.2px;}
+    .subtitle{font-size:13px;color:var(--muted2);margin-top:3px;max-width:520px;line-height:1.5;}
+
+    .pill{
+      display:flex;align-items:center;gap:10px;
+      padding:10px 12px;border-radius:999px;
+      background:var(--cardSolid);
+      border:1px solid var(--stroke);
+      font-size:12px;color:var(--muted);
+    }
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+
+    .card{
+      background:var(--card);
+      backdrop-filter:blur(10px);
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+    @media (max-width: 980px){ .grid3{grid-template-columns:1fr;} }
+
+    .portal{
+      border:1px solid var(--stroke);
+      border-radius:18px;
+      background:rgba(255,255,255,.03);
+      padding:16px;
+      transition:border-color .2s ease, transform .06s ease, background .2s ease;
+      min-height:210px;
+      display:flex;flex-direction:column;justify-content:space-between;
+    }
+    .portal:hover{
+      border-color:rgba(110,168,255,.6);
+      background:rgba(110,168,255,.06);
+    }
+    .portal:active{transform:translateY(1px);}
+
+    .pTitle{font-size:15px;font-weight:850;margin:0;}
+    .pDesc{margin:10px 0 0 0;color:var(--muted);font-size:13px;line-height:1.55;}
+    .divider{height:1px;background:var(--stroke2);margin:14px 0;}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      gap:10px;
+      width:100%;
+      border-radius:14px;
+      padding:12px 14px;
+      font-size:14px;
+      cursor:pointer;
+      border:1px solid var(--stroke);
+      background:var(--cardSolid);
+      color:var(--text);
+      text-decoration:none;
+      transition:transform .05s ease, opacity .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .btn:active{transform:translateY(1px);}
+    .btn.primary{
+      background:linear-gradient(135deg, var(--accent), var(--accent2));
+      border:none;color:#fff;font-weight:750;
+    }
+
+    .foot{
+      margin-top:14px;
+      display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      font-size:12px;color:var(--muted2);
+    }
+
+    .noteBox{
+      border:1px dashed var(--stroke);
+      border-radius:16px;
+      padding:14px;
+      color:var(--muted2);
+      background:rgba(255,255,255,.02);
+      margin-top:14px;
+      line-height:1.55;
+      font-size:13px;
+    }
+    code.small{
+      font-size:12px;
+      padding:2px 6px;
+      border-radius:10px;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--stroke);
+      color:var(--text);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg">
+    <div class="grid"></div>
+    <div class="glow a"></div>
+    <div class="glow b"></div>
+  </div>
+
+  <main class="shell" role="main">
+    <header>
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div>
+          <div class="title">Robloxian Franchise Network</div>
+          <div class="subtitle">
+            Robloxian Franchise Network Access Page.
+            Use the links below to access official RFN franchise portals and reporting channels.
+          </div>
+        </div>
+      </div>
+
+      <div class="pill" aria-label="status">
+        <div class="dot" aria-hidden="true"></div>
+        <span>Official RFN Access</span>
+      </div>
+    </header>
+
+    <section class="card" aria-label="portals">
+      <div class="noteBox">
+        Links on this page route to RFN-managed systems. If a portal is unavailable, contact your corporate chain of command.
+        Replace each <code class="small">LINK_HERE</code> value with your live URL.
+      </div>
+
+      <div class="grid3">
+        <!-- Customer Portal -->
+        <div class="portal">
+          <div>
+            <h2 class="pTitle">Customer Portal</h2>
+            <p class="pDesc">
+              Customer-facing access point for official RFN services, customer support workflows, and approved public requests.
+              This portal should only contain information authorized for external visibility.
+            </p>
+            <div class="divider"></div>
+          </div>
+          <a class="btn primary" href="LINK_HERE">Open Customer Portal</a>
+        </div>
+
+        <!-- Franchise Announcement Portal -->
+        <div class="portal">
+          <div>
+            <h2 class="pTitle">Franchise Announcement Portal</h2>
+            <p class="pDesc">
+              Restricted franchise communications channel for operational notices, policy updates, compliance expectations,
+              and corporate directives. Franchise access only.
+            </p>
+            <div class="divider"></div>
+          </div>
+          <a class="btn" href="LINK_HERE">Open Announcement Portal</a>
+        </div>
+
+        <!-- Franchise Tipline -->
+        <div class="portal">
+          <div>
+            <h2 class="pTitle">Franchise Tipline</h2>
+            <p class="pDesc">
+              Confidential reporting channel for governance concerns, compliance risks, misconduct, or system integrity issues.
+              Reports should be factual, time-stamped, and evidence-based when possible.
+            </p>
+            <div class="divider"></div>
+          </div>
+          <a class="btn" href="LINK_HERE">Open Franchise Tipline</a>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div>Internal system. Distribution restricted.</div>
+        <div>RFN governance standard: documentation over memory.</div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
